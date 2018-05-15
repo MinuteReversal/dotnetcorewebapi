@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using webapi.Models;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace webapi
 {
@@ -47,6 +48,11 @@ namespace webapi
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseWebSockets();
+            app.UseCors(builder=>builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                );
             app.UseMvc();
         }
     }

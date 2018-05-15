@@ -10,13 +10,16 @@
 
 <body>
     <div>
-        <input id="params" type="text"/>
+        <input id="url" type="url" value="api/todo" placeholder="url" />
     </div>
     <div>
-        <textarea id="requestBody" cols="40" rows="6"></textarea>
+        <input id="params" type="text" pattern="/1" />
     </div>
     <div>
-        <textarea id="responseBody" cols="40" rows="6"></textarea>
+        <textarea id="requestBody" cols="40" rows="6" placeholder="requestBody"></textarea>
+    </div>
+    <div>
+        <textarea id="responseBody" cols="40" rows="6" placeholder="responseBody"></textarea>
     </div>
     <div>
         <button id="btnGET">GET</button>
@@ -25,6 +28,7 @@
         <button id="btnDELETE">DELETE</button>
     </div>
     <script>
+        var url = document.querySelector("#url");
         var requestBody = document.querySelector("#requestBody");
         var responseBody = document.querySelector("#responseBody");
         var btnGET = document.querySelector("#btnGET");
@@ -32,32 +36,32 @@
         var btnPUT = document.querySelector("#btnPUT");
         var btnDELETE = document.querySelector("#btnDELETE");
         var xhr = new XMLHttpRequest();
-        var url = "api/todo"
+
 
         xhr.addEventListener("load", function (evt) {
             responseBody.value = evt.target.responseText;
         });
 
         btnGET.addEventListener("click", function (evt) {
-            xhr.open("GET", url + params.value);
+            xhr.open("GET", url.value + params.value);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send();
         });
 
         btnPOST.addEventListener("click", function (evt) {
-            xhr.open("POST", url+ params.value);
+            xhr.open("POST", url.value + params.value);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(requestBody.value);
         });
 
         btnPUT.addEventListener("click", function (evt) {
-            xhr.open("PUT", url+ params.value);
+            xhr.open("PUT", url.value + params.value);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(requestBody.value);
         });
 
         btnDELETE.addEventListener("click", function (evt) {
-            xhr.open("DELETE", url + params.value);
+            xhr.open("DELETE", url.value + params.value);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send();
         });
