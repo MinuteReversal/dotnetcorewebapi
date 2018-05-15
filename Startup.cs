@@ -46,6 +46,7 @@ namespace webapi
             //app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseWebSockets();
             app.UseMvc();
         }
     }
