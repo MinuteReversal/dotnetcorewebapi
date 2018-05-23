@@ -13,6 +13,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using webapi.Models;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using NJsonSchema;
+using NSwag.AspNetCore;
+using System.Reflection;
 
 namespace webapi
 {
@@ -52,7 +55,14 @@ namespace webapi
                     .AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod()
-                );
+            );
+
+            // Enable the Swagger UI middleware and the Swagger generator
+            app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
+            {
+                settings.GeneratorSettings.DefaultPropertyNameHandling = 
+                    PropertyNameHandling.CamelCase;
+            });
             app.UseMvc();
         }
     }
